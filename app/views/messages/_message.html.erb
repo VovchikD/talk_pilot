@@ -1,0 +1,14 @@
+<article class="message message-<%= message.role %>">
+  <div class="message-label"><%= message.role.capitalize %></div>
+  <div class="message-content"><%= simple_format(message.content) %></div>
+  <% if message.audio.attached? %>
+    <% should_autoplay = local_assigns[:latest_assistant_audio_message] == message %>
+    <%= tag.audio(
+      class: "message-audio",
+      controls: true,
+      autoplay: should_autoplay,
+      src: url_for(message.audio),
+      data: { assistant_audio: should_autoplay }
+    ) %>
+  <% end %>
+</article>
