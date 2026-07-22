@@ -8,17 +8,22 @@ class MessagesController < ApplicationController
       return
     end
 
-    user_message = @conversation_session.messages.create!(role: "user", content: content)
-    user_message.audio.attach(message_params[:audio]) if message_params[:audio].present?
+    @user_message = @conversation_session.messages.create!(role: "user", content: content)
+    @user_message.audio.attach(message_params[:audio]) if message_params[:audio].present?
 
     assistant_reply = Ai::ConversationReply.call(@conversation_session)
 
     if assistant_reply.present?
-      assistant_message = @conversation_session.messages.create!(role: "assistant", content: assistant_reply)
-      attach_assistant_audio(assistant_message)
+      @assistant_message = @conversation_session.messages.create!(role: "assistant", content: assistant_reply)
+      attach_assistant_audio(@assistant_message)
     end
 
-    redirect_to @conversation_session
+    @message = Message.new
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @conversation_session }
+    end
   rescue Ai::ConfigurationError => error
     redirect_to @conversation_session, alert: error.message
   end

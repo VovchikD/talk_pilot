@@ -1,0 +1,15 @@
+<%= turbo_stream.remove "empty_messages_state" %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render "messages/message", message: @user_message, latest_assistant_audio_message: @assistant_message %>
+<% end %>
+
+<% if @assistant_message.present? %>
+  <%= turbo_stream.append "messages" do %>
+    <%= render "messages/message", message: @assistant_message, latest_assistant_audio_message: @assistant_message %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "message_form" do %>
+  <%= render "messages/form", conversation_session: @conversation_session, message: @message %>
+<% end %>

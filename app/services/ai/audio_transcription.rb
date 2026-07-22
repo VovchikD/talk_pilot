@@ -16,7 +16,6 @@ module Ai
     def call
       raise Ai::TranscriptionError, "Audio recording is missing." if audio.blank?
 
-      debugger
       response = client.audio.transcriptions.create(
         file: Pathname(audio.tempfile.path),
         model: model,

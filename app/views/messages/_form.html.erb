@@ -1,0 +1,11 @@
+<%= form_with model: [conversation_session, message], id: "message_form", class: "message-form", data: { controller: "audio-recorder" } do |form| %>
+  <%= form.text_area :content, rows: 3, required: true, autofocus: true, placeholder: "Type your English message...", data: { audio_recorder_target: "textArea" } %>
+  <%= form.file_field :audio, accept: "audio/wav,audio/mpeg,audio/mp4,audio/webm", class: "visually-hidden", data: { audio_recorder_target: "fileInput" } %>
+
+  <div class="message-actions">
+    <button type="button" class="secondary-button" data-action="audio-recorder#toggle" data-audio-recorder-target="recordButton">Record</button>
+    <%= form.submit "Send", class: "primary-button" %>
+  </div>
+
+  <div class="recorder-status" data-audio-recorder-target="status" aria-live="polite"></div>
+<% end %>
