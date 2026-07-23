@@ -47,6 +47,7 @@ module Ai
       [{ role: "system", content: system_prompt }] + conversation_messages
     end
 
+    # Rewrite!!!
     def system_prompt
       <<~PROMPT
         You are TalkPilot, a friendly and supportive English conversation coach.

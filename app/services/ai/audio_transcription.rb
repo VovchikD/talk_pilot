@@ -5,12 +5,12 @@ module Ai
   class AudioTranscription
     DEFAULT_MODEL = "gpt-4o-mini-transcribe"
 
-    def self.call(audio)
-      new(audio).call
-    end
-
     def initialize(audio)
       @audio = audio
+    end
+
+    def self.call(audio)
+      new(audio).call
     end
 
     def call
