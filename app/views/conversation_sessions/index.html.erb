@@ -1,0 +1,56 @@
+<main class="page-shell">
+  <section class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">TP</span>
+      <div>
+        <h1>Talk Pilot</h1>
+        <p>English conversation practice</p>
+      </div>
+    </div>
+
+    <%= form_with model: @conversation_session, class: "new-session-form" do |form| %>
+      <div class="field">
+        <%= form.label :title, "Dialog title" %>
+        <%= form.text_field :title, value: "English practice", required: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :topic, "Topic" %>
+        <%= form.text_field :topic, placeholder: "Travel, work, interview..." %>
+      </div>
+
+      <div class="field">
+        <%= form.label :level, "Level" %>
+        <%= form.select :level, ["A1", "A2", "B1", "B2", "C1", "C2"], include_blank: "Not sure" %>
+      </div>
+
+      <%= form.submit "Start dialog", class: "primary-button" %>
+    <% end %>
+  </section>
+
+  <section class="content">
+    <div class="section-header">
+      <h2>Dialogs</h2>
+      <p><%= pluralize(@conversation_sessions.size, "conversation") %></p>
+    </div>
+
+    <% if @conversation_sessions.any? %>
+      <div class="session-list">
+        <% @conversation_sessions.each do |conversation_session| %>
+          <%= link_to conversation_session, class: "session-row" do %>
+            <div>
+              <strong><%= conversation_session.display_title %></strong>
+              <span><%= [conversation_session.topic, conversation_session.level].compact_blank.join(" · ") %></span>
+            </div>
+            <time><%= time_ago_in_words(conversation_session.updated_at) %> ago</time>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <h2>No dialogs yet</h2>
+        <p>Create your first practice dialog and send a message to ChatGPT.</p>
+      </div>
+    <% end %>
+  </section>
+</main>

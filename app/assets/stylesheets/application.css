@@ -8,3 +8,388 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  --background: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #eef2f6;
+  --border: #d9dee6;
+  --text: #1f2933;
+  --muted: #667085;
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --danger: #b42318;
+  --shadow: 0 12px 30px rgba(31, 41, 51, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell,
+.chat-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  min-height: 100vh;
+}
+
+.sidebar,
+.chat-aside {
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  padding: 28px;
+}
+
+.content,
+.chat-panel {
+  padding: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.brand-mark {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 800;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.brand h1,
+.chat-meta h1 {
+  margin-bottom: 4px;
+  font-size: 24px;
+}
+
+.brand p,
+.chat-meta p,
+.section-header p,
+.empty-state p,
+.session-row span,
+.message-label {
+  color: var(--muted);
+}
+
+.new-session-form,
+.message-form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+label {
+  color: #344054;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+  padding: 11px 12px;
+}
+
+textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+  outline: none;
+}
+
+.primary-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 750;
+  padding: 0 18px;
+}
+
+.secondary-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 750;
+  padding: 0 18px;
+}
+
+.secondary-button:hover {
+  background: var(--surface-muted);
+}
+
+.secondary-button.recording {
+  border-color: rgba(180, 35, 24, 0.35);
+  background: #fff1f0;
+  color: var(--danger);
+}
+
+.primary-button:hover {
+  background: var(--accent-strong);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.session-list {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+}
+
+.session-row:last-child {
+  border-bottom: 0;
+}
+
+.session-row:hover {
+  background: var(--surface-muted);
+}
+
+.session-row strong,
+.session-row span {
+  display: block;
+}
+
+.session-row time {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 28px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 28px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.chat-panel {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 18px;
+  min-width: 0;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
+.message {
+  width: min(760px, 86%);
+}
+
+.message-user {
+  align-self: flex-end;
+}
+
+.message-assistant {
+  align-self: flex-start;
+}
+
+.message-label {
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.message-content {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  line-height: 1.55;
+  padding: 14px 16px;
+}
+
+.message-user .message-content {
+  border-color: rgba(15, 118, 110, 0.25);
+  background: #dff5f1;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-form {
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+.message-form textarea {
+  min-height: 74px;
+}
+
+.message-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.recorder-status {
+  min-height: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  grid-column: 1 / -1;
+}
+
+.message-audio {
+  display: block;
+  width: min(360px, 100%);
+  margin-top: 8px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.flash {
+  position: fixed;
+  z-index: 10;
+  top: 14px;
+  left: 50%;
+  width: min(720px, calc(100% - 28px));
+  transform: translateX(-50%);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 12px 14px;
+}
+
+.flash-notice {
+  border: 1px solid rgba(15, 118, 110, 0.25);
+  background: #ecfdf3;
+}
+
+.flash-alert {
+  border: 1px solid rgba(180, 35, 24, 0.25);
+  background: #fff1f0;
+  color: var(--danger);
+}
+
+@media (max-width: 780px) {
+  .page-shell,
+  .chat-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar,
+  .chat-aside {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content,
+  .chat-panel,
+  .sidebar,
+  .chat-aside {
+    padding: 20px;
+  }
+
+  .session-row,
+  .section-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .message-form {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .message {
+    width: 100%;
+  }
+
+  .message-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
